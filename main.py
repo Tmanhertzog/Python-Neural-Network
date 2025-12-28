@@ -588,24 +588,3 @@ while Update_counts < totalUpdates:
         
     Epoch_count +=1
     
-    
-
-
-
-
-#===============================
-# MAIN
-#===============================
-#for test Lk= = 6, n = 10
-# Lk = 6
-# n = 10
-
-# Delta = np.random.randint(1, 10, (6, 10))
-# bias = np.random.randint(1, 10, 6)
-
-# print(bias)
-# print(adjustBiases(train_n, Delta, bias))
-
-# print("b", b_grad(n, Delta))
-
-# print(B(n, Delta))
