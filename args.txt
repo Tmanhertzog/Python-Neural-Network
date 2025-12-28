@@ -1,0 +1,54 @@
+//Command Line Arguments txt file
+// 
+
+// run:
+// python3 prog1/prog1.py (Get-Content prog1/args.txt | Where-Object { $_ -notmatch "^//" -and $_ -ne "" })
+
+
+// Arguments:
+// ---------------
+
+//Train Features (str of file name)
+classification data/dataset2.train_features.txt
+
+//Train Targets (str of file name)
+classification data/dataset2.train_targets.txt
+
+//Dev Features (str of file name)
+classification data/dataset2.dev_features.txt
+
+//Dev Targets (str of file name)
+classification data/dataset2.dev_targets.txt
+
+//Number of Hidden Layer Units (int)
+8
+
+//Number of Hidden Layers (0 = linear model, 1 = single layer model, >1 = DNN)
+3
+
+//Hidden Unit Activation (str either 'sig', 'tanh', or 'relu')
+relu
+
+//Problem Mode (str either C or R)
+C
+
+//Output Dimenstion (int [number of classes] or [dimension of output vector for regression])
+3
+
+//Total updates (int number of gradient descents model will train for)
+300
+
+//Learn Rate (int [usually between: 0 - 1.0])
+0.001
+
+//Initialization Range (float uniformally random in range [-INITIALRANGE, +INITIALRANGE], typically: [-1,1])
+1
+
+//Minibatch Size (int number of datapoints in minibatch [0 for full batch] [typically 16-512])
+30
+
+//Report Frequency (int every x updates you will print a report on your dev set performance)
+60
+
+//Verbose Mode (bool Whether or not will operate in Verbose mode)
+False
