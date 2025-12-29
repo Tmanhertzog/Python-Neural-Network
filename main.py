@@ -1,11 +1,10 @@
 import numpy as np
-import sklearn.datasets as datasets
 import sys
 
 
-#===============================
-# Command Line Arguments
-#===============================
+#==========================================
+# Command Line Arguments (Hyperparameters)
+#==========================================
 
 # #1 Train Features
 #----------------------
@@ -24,23 +23,17 @@ elif len(trainF.shape) == 2:
 else:
     print("Train Features Dataset error")
 
-# print("Train Features, ", trainF.shape)
-
 # #2 Train Targets
 #----------------------
 trainT = sys.argv[2]
-
 trainT = np.loadtxt(trainT)
-# print("Train Targets,  ", trainT.shape)
-# print(type(trainT[0]))
 
 # #3 Dev Features
 #----------------------
 devF = sys.argv[3]
-
 devF = np.loadtxt(devF)
 dev_n = devF.shape[0]
-# print(dev_n)
+
 if len(devF.shape) == 1:
     D = 1
 elif len(devF.shape) == 2:
@@ -50,14 +43,10 @@ else:
 
 full_n = max(dev_n, train_n)
 
-# print("Dev Features,   ", devF.shape)
-
 # #4 Dev Targets
 #----------------------
 devT = sys.argv[4]
-
 devT = np.loadtxt(devT)
-# print("Dev Targets,    ", devT.shape)
 
 # #5 Num of Hidden Units
 #----------------------
@@ -150,21 +139,12 @@ def accuracy(y, y_pred, n):
     y_pred = (y_pred == y_pred.max(axis=1, keepdims=True))
     y_pred = y_pred.T.astype(int)
     y_pred = np.where(y_pred, 1, 0)
-    # print("accuracy shape: ", y_pred.shape)
-    # print("y shape: ", y.T.shape)
 
     y = y.astype(int)
-
     y_pred_sum = y_pred & y.T
-    # y_pred_sum = np.bitwise_and(y_pred, y)
     total_correct  = sum(sum(y_pred_sum))
-    # print("total correct", total_correct, "\nn = ", n)
-    # print("total_correct %", total_correct/n)
 
     return (total_correct/n).round(3)
-
-
-
 
 
 
@@ -183,11 +163,8 @@ def reshuffle(matrix):
     MB_Array = []
 
     np.random.shuffle(matrix)
-    # print(matrix)
 
     while front < (len(matrix)+1):
-        # print(matrix[back:front, :])
-        # print()
         MB_Array.append(matrix[back:front, :])
 
         back += MB_size
@@ -361,20 +338,15 @@ def forwardpass(X_data, n, Astack, zStack):
     Astack.append(A0)
 
     for i in range(hiddenLayers+1):
-        # print("LOOP: ", i)
         #Initializes WArray
         if WArray[i] is None and i != hiddenLayers:
-            # print("test 1")
             WArray[i] = np.random.uniform(-initialRange, initialRange, (Astack[-1].shape[0], L))
         elif WArray[i] is None and i == hiddenLayers:
-            # print("test 1")
             WArray[i] = np.random.uniform(-initialRange, initialRange, (Astack[-1].shape[0], C))
         #Initializes BArray 
         if BArray[i] is None and i != hiddenLayers:
-            # print("test 2")
             BArray[i] = createBias(L, n)
         elif BArray[i] is None and i == hiddenLayers:
-            # print("test 2")
             BArray[i] = createBias(C, n)
 
         z = zVector(Astack[-1], WArray[i], BArray[i][:, :n]) #X, W, B
@@ -389,8 +361,6 @@ def backwardpass(y_data, y_pred, n, Astack, zStack):
     #updates last weight in weight matrix and pops from the Astack
     A_k_minus_one = Astack.pop()
     lastCalculatedDelta = deltaL(y_data, y_pred)  #saves the last calculated delta
-    # print("y_data", y_data)
-    # print("delta", lastCalculatedDelta)
     WArray[-1] = adjustWeights(n, A_k_minus_one, lastCalculatedDelta, WArray[-1])
     BArray[-1] = adjustBiases(n, lastCalculatedDelta, BArray[-1][:, 0])
 
@@ -416,16 +386,6 @@ def lossCalculations(y_data, y_pred, n):
 
 
 
-
-
-
-
-
-
-
-
-
-
 #===============================
 # Neural Network
 #===============================
@@ -444,7 +404,6 @@ def neuralNetwork(data_F, data_T, n):
     if mode == "C":
         data_T = data_T.astype(int)
         yHot = oneHot(data_T).T
-        # print(yHot.shape)
 
     Astack = []
     zStack = []
@@ -463,7 +422,6 @@ def neuralNetwork(data_F, data_T, n):
                 data_T = yHot
 
         loss = lossCalculations(data_T, y_pred, n)
-        # print("Loss: ", loss)
 
         zStack.pop()
 
@@ -477,8 +435,6 @@ def neuralNetwork(data_F, data_T, n):
 
 
 def devAssesment(X_dev, Y_dev, n):
-
-    # print("devin", n)
 
     temp_Astack = []
     temp_zStack = []
@@ -513,16 +469,6 @@ def devAssesment(X_dev, Y_dev, n):
     return loss
 
 
-   
-
-    
-
-
-   
-
-
-
-
 
 
 #===============================
@@ -538,18 +484,10 @@ if len(X_data.shape) == 1:
 Y_data_width = Y_data.shape[1]
 
 fullds = np.concatenate((X_data, Y_data), axis = 1)
-# print("fullds: ", fullds.shape)
-
-# print(fullds)
-
 MB_Array = reshuffle(fullds)
-
-# print(MB_Array)
 
 Update_counts = 0
 Epoch_count = 0
-
-# print(len(MB_Array))
 
 while Update_counts < totalUpdates:
     MB_Array = reshuffle(fullds)
@@ -561,10 +499,8 @@ while Update_counts < totalUpdates:
         brokenX = MB_Array[0][:, :-Y_data_width]
         brokenY = MB_Array[0][:, -Y_data_width:].squeeze()
         loss = neuralNetwork(brokenX, brokenY, len(brokenX))
-
-        # print("Barray after NN", BArray)
         
-        #for the initial (SORRY)
+        #for the initial
         if Update_counts == 0:
             print("Epoch ", str(Epoch_count).zfill(4), "  UPDATE ", str(Update_counts).zfill(6), ":", sep="", end="")
             if verboseMode == True:
