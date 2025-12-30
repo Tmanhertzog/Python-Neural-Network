@@ -1,7 +1,7 @@
 # Python-Neural-Network
 ### Created by: Tristan Hertzog and Jaxon Powell
 
-Demo video: 
+Demo video: [https://youtu.be/cbOzUas3Ju8](https://youtu.be/cbOzUas3Ju8)
 
 A Deep Neural Network created with no imports or libraries with the exception of NumPy which was exclusively use for math logic. The intent behind this project is to prove and explore the inner workings of neural networks that implement regression and classification as well as minibatch
 
@@ -17,18 +17,18 @@ A Deep Neural Network created with no imports or libraries with the exception of
 ### How to run:
 
 **1.** Clone this repository\
-**2.** Modify args.txt train/dev feature or targets to the correct wanted file name.
-**3.** In args.txt modify "Problem Mode" to match the directory in which you are using data from.
-**4.** Update "Output dimension" in args.txt to match the number of classes in classification or the output vector size. Both should be integers and info for dataset is given in data_info.txt under each data directory.
+**2.** Modify args.txt train/dev feature or targets to the correct wanted file name.\
+**3.** In args.txt modify "Problem Mode" to match the directory in which you are using data from.\
+**4.** Update "Output dimension" in args.txt to match the number of classes in classification or the output vector size. Both should be integers and info for dataset is given in data_info.txt under each data directory.\
 **5.** Run in cloned directory:
-    <pre>python main.py (Get-Content args.txt | Where-Object { $_ -notmatch "^//" -and $_ -ne "" })</pre>
-**6.** Tune for hyperparameters. Depending on data you may get overflow errors, these are not bugs or issues and NN will work properly depending on initialization matrix.
+    <pre>python main.py (Get-Content args.txt | Where-Object { $_ -notmatch "^//" -and $_ -ne "" })</pre>\
+**6.** Tune for hyperparameters. Depending on data you may get overflow errors, these are not bugs or issues and NN will work properly depending on initialization matrix.\
 
 ### Creating new data:
 
-**1.** After cloning the repository, locate make_data.py.
+**1.** After cloning the repository, locate make_data.py.\
 **2.** Run in cloned directory:
     <pre>python make_data.py A1 A2 A3 A4 A5</pre>
-    where the A1, ..., A5 are arguments that need to be modified. The description of which can be found at the top of make_data.py
-**3.** Locate newly found data in data file either under classification or reression.
-**4.** Locate newly created data information for args.txt in data_info.txt
+    where the A1, ..., A5 are arguments that need to be modified. The description of which can be found at the top of make_data.py\
+**3.** Locate newly found data in data file either under classification or reression.\
+**4.** Locate newly created data information for args.txt in data_info.txt\
