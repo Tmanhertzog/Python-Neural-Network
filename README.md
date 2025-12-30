@@ -1,7 +1,7 @@
 # Python-Neural-Network
 ### Created by: Tristan Hertzog and Jaxon Powell
 
-Demo video: 
+Demo video: [https://youtu.be/cbOzUas3Ju8](https://youtu.be/cbOzUas3Ju8)
 
 A Deep Neural Network created with no imports or libraries with the exception of NumPy which was exclusively use for math logic. The intent behind this project is to prove and explore the inner workings of neural networks that implement regression and classification as well as minibatch
 
