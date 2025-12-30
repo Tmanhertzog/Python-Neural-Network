@@ -1,0 +1,1 @@
+dataset1 - mode=R, D=5, C=3, train_N=1000, dev_N=200, std=0.2

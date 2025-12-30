@@ -2,23 +2,23 @@
 // 
 
 // run:
-// python3 prog1/prog1.py (Get-Content prog1/args.txt | Where-Object { $_ -notmatch "^//" -and $_ -ne "" })
+// python3 main.py (Get-Content args.txt | Where-Object { $_ -notmatch "^//" -and $_ -ne "" })
 
 
 // Arguments:
 // ---------------
 
 //Train Features (str of file name)
-classification data/dataset2.train_features.txt
+data/classification/dataset1.train_x.txt
 
 //Train Targets (str of file name)
-classification data/dataset2.train_targets.txt
+data/classification/dataset1.train_y.txt
 
 //Dev Features (str of file name)
-classification data/dataset2.dev_features.txt
+data/classification/dataset1.dev_x.txt
 
 //Dev Targets (str of file name)
-classification data/dataset2.dev_targets.txt
+data/classification/dataset1.dev_y.txt
 
 //Number of Hidden Layer Units (int)
 8
@@ -30,7 +30,7 @@ classification data/dataset2.dev_targets.txt
 relu
 
 //Problem Mode (str either C or R)
-C
+R
 
 //Output Dimenstion (int [number of classes] or [dimension of output vector for regression])
 3
@@ -51,4 +51,4 @@ C
 60
 
 //Verbose Mode (bool Whether or not will operate in Verbose mode)
-False
+True
