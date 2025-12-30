@@ -1,1 +1,23 @@
+2025, Tristan Hertzog and Jaxon Powell
+ 
+ 
+    To fully understand the inner workings of a deep neural network, both through classification and regression problems, we have decided
+to create a fully functioning deep neural network without the use of any helper libraries with the exception of NumPy which we exclusively
+use for math logic (matrix multiplication, maximum, matrix creation, array creation, and file loading).
 
+    Our Approach was to start off with the regression of the neural network and the functionality of how running the program would look.
+We landed on creating a separate file called args.txt to easily recall and traceback to our previous arguments passed for the program. 
+We also decided on creating a make_data.py file to easily create new fitting data which is documented in each section under a file titled
+data_info.txt. Once finished with the basics and a minimal product for the regression section we worked on developing the classification
+sections and adding any and all required functions for loss, activation functions, encodings, and initializations. Finally we designed the
+minibatch functionality and the dev assesment based on the the training data. None of our design was created through AI or any generative
+products.
+
+    Once finished our DNN worked well as intended for all sections included. It gave expected outputs on our data that was fed, and creates
+ready to use models that can be easily modified to be put to use in other future projects. With some experiementations on our classification
+data reaching loss as low at 0.01. Our model's outputs and results had also beenmonitored and approved by individuals working at state run 
+institutions.
+
+    What to improve next: The next step for this project would be adding more hyperparameters which would allow our neural network to be able
+to fine tune to specific problems and potentially compete with mainstream libraries. To do so we would also need to focus on cleaning and
+maximizing efficiency for our model.
