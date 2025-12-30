@@ -9,37 +9,37 @@
 // ---------------
 
 //Train Features (str of file name)
-data/classification/dataset1.train_x.txt
+data/regression/dataset2.train_x.txt
 
 //Train Targets (str of file name)
-data/classification/dataset1.train_y.txt
+data/regression/dataset2.train_y.txt
 
 //Dev Features (str of file name)
-data/classification/dataset1.dev_x.txt
+data/regression/dataset2.dev_x.txt
 
 //Dev Targets (str of file name)
-data/classification/dataset1.dev_y.txt
+data/regression/dataset2.dev_y.txt
 
 //Number of Hidden Layer Units (int)
 8
 
 //Number of Hidden Layers (0 = linear model, 1 = single layer model, >1 = DNN)
-3
+5
 
 //Hidden Unit Activation (str either 'sig', 'tanh', or 'relu')
-relu
+tanh
 
 //Problem Mode (str either C or R)
 R
 
 //Output Dimenstion (int [number of classes] or [dimension of output vector for regression])
-3
+1
 
 //Total updates (int number of gradient descents model will train for)
-300
+40000
 
 //Learn Rate (int [usually between: 0 - 1.0])
-0.001
+0.00005
 
 //Initialization Range (float uniformally random in range [-INITIALRANGE, +INITIALRANGE], typically: [-1,1])
 1
@@ -48,7 +48,7 @@ R
 30
 
 //Report Frequency (int every x updates you will print a report on your dev set performance)
-60
+90
 
 //Verbose Mode (bool Whether or not will operate in Verbose mode)
 True
