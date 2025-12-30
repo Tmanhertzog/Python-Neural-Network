@@ -16,19 +16,19 @@ A Deep Neural Network created with no imports or libraries with the exception of
 
 ### How to run:
 
-__1.__ Clone this repository
-__2.__ Modify args.txt train/dev feature or targets to the correct wanted file name.
-__3.__ In args.txt modify "Problem Mode" to match the directory in which you are using data from.
-__4.__ Update "Output dimension" in args.txt to match the number of classes in classification or the output vector size. Both should be integers and info for dataset is given in data_info.txt under each data directory.
-__5.__ Run in cloned directory:
+**1.** Clone this repository\
+**2.** Modify args.txt train/dev feature or targets to the correct wanted file name.
+**3.** In args.txt modify "Problem Mode" to match the directory in which you are using data from.
+**4.** Update "Output dimension" in args.txt to match the number of classes in classification or the output vector size. Both should be integers and info for dataset is given in data_info.txt under each data directory.
+**5.** Run in cloned directory:
     <pre>python main.py (Get-Content args.txt | Where-Object { $_ -notmatch "^//" -and $_ -ne "" })</pre>
-__6.__ Tune for hyperparameters. Depending on data you may get overflow errors, these are not bugs or issues and NN will work properly depending on initialization matrix.
+**6.** Tune for hyperparameters. Depending on data you may get overflow errors, these are not bugs or issues and NN will work properly depending on initialization matrix.
 
 ### Creating new data:
 
-__1.__ After cloning the repository, locate make_data.py.
-__2.__ Run in cloned directory:
+**1.** After cloning the repository, locate make_data.py.
+**2.** Run in cloned directory:
     <pre>python make_data.py A1 A2 A3 A4 A5</pre>
     where the A1, ..., A5 are arguments that need to be modified. The description of which can be found at the top of make_data.py
-__3.__ Locate newly found data in data file either under classification or reression.
-__4.__ Locate newly created data information for args.txt in data_info.txt
+**3.** Locate newly found data in data file either under classification or reression.
+**4.** Locate newly created data information for args.txt in data_info.txt
