@@ -8,7 +8,6 @@ import sys
 #===============================
 
 # #1 Train Features
-#----------------------
     # (str), the name of the training set feature file
     # The file should contain N lines (N is number of data points)
     # Each line should contain D space-delimited floating point values (where D is the feature dimension).
@@ -24,20 +23,15 @@ elif len(trainF.shape) == 2:
 else:
     print("Train Features Dataset error")
 
-
 # #2 Train Targets
-#----------------------
 trainT = sys.argv[2]
-
 trainT = np.loadtxt(trainT)
 
 # #3 Dev Features
-#----------------------
 devF = sys.argv[3]
-
 devF = np.loadtxt(devF)
 dev_n = devF.shape[0]
-# print(dev_n)
+
 if len(devF.shape) == 1:
     D = 1
 elif len(devF.shape) == 2:
@@ -48,21 +42,16 @@ else:
 full_n = max(dev_n, train_n)
 
 # #4 Dev Targets
-#----------------------
 devT = sys.argv[4]
-
 devT = np.loadtxt(devT)
 
 # #5 Num of Hidden Units
-#----------------------
 L = int(sys.argv[5])
 
 # #6 Num of Hidden Layers
-#----------------------
 hiddenLayers = int(sys.argv[6])
 
 # #7 Hidden Unit Activation
-#----------------------
 def activation(f):
     if sys.argv[7] == "sig":
         return sigmoid(f)
@@ -84,39 +73,30 @@ def activationPrime(f):
         print("No activation function specified")
 
 # #8 Problem Mode
-#----------------------
 mode = sys.argv[8]
 
 # #9 Output dimension
-#----------------------
 C = int(sys.argv[9])
 
-
 # #10 Total Updates
-#----------------------
 totalUpdates = int(sys.argv[10])
 
 # #11 Learn Rate
-#----------------------
 learnRate = float(sys.argv[11])
 
 # #12 Initialization Range
-#----------------------
 initialRange = float(sys.argv[12])
 
 # #13 Minibatch Size
-#----------------------
 MB_size = int(sys.argv[13])
 
 if MB_size == 0:
     MB_size = train_n
 
 # #14 Report Frequency
-#----------------------
 reportFrequency = int(sys.argv[14])
 
 # #15 Verbose Mode
-#----------------------
 if sys.argv[15] == "True":
     verboseMode = True
 elif sys.argv[15] == "False":
@@ -152,18 +132,9 @@ def accuracy(y, y_pred, n):
     return (total_correct/n).round(3)
 
 
-
-
-
-
-
 #=============================
 # Transformation Functions
 #=============================
-
-#--------------
-# Reshuffle
-#--------------
 
 def reshuffle(matrix):
     back = 0
@@ -180,15 +151,8 @@ def reshuffle(matrix):
     
     return MB_Array
 
-#--------------
-# one hot encoding
-#--------------
 def oneHot(y):
     return np.eye(C)[y].T
-
-#--------------
-# transpose
-#--------------
 
 def transpose(x):
     if len(x.shape) == 1:
@@ -196,18 +160,8 @@ def transpose(x):
     else:
         return x.T
 
-#----------------------
-# Linear Regression
-#----------------------
-
 def zVector(X, W, B):
     return (W.T@X)+B
-
-#----------------------
-# Logistic Regression
-#----------------------
-
-
 
 
 #==============================
@@ -222,7 +176,7 @@ def relu(z):
     return np.maximum(0, z)
 
 def reluPrime(z):
-    return np.where(z > 0, 1, 0)    #return 1 when positive and 0 when negative
+    return np.where(z > 0, 1, 0)  
 
 #----------------------
 # sigmoid
@@ -271,9 +225,9 @@ def deltaK(z, W, delta): # W = Wk+1, delta = delta_k+1
 def W_grad(n, A, delta): #A = Ak-1  | Delta = deltak
     return (1/n) * (A @ transpose(delta))
 
-
-# Bias calculations     [WORKS]
-#------------------------------
+#----------------------
+# Bias calculations 
+#----------------------
 
 # outputs b_grad vector (Lk, )
 # delta = [Lk, n]
@@ -292,8 +246,6 @@ def B_matrix(n, b_grad):
 # returns B_grad [Lk, n]
 def B(n, delta):
     return B_matrix(n, b_grad(n, delta))
-
-
 
 
 #===============================
@@ -321,15 +273,12 @@ def adjustBiases(n, delta, b_vector):
     new_biases = b_vector - (learnRate * b_grad(n, delta))
     return B_matrix(n, new_biases)
 
-#Replaces devBArray with updated biases from BArray to the size dev_n
+# Replaces devBArray with updated biases from BArray to the size dev_n
 # devBArray = [(L x dev_n), (L x dev_n), ..., (C x dev_n)]
 def update_devBArray(BArray):
     for i in range(len(BArray)):
         devBArray[i] = B_matrix(dev_n, BArray[i].T[0])
     
-
-
-
 
 #===============================
 # Forwardpass and Backpass
@@ -363,7 +312,7 @@ def forwardpass(X_data, n, Astack, zStack):
 
     return Astack, zStack
 
-#returns nothing, updates WArray, BArray, and clears Astack & zStack
+# returns nothing, updates WArray, BArray, and clears Astack & zStack
 def backwardpass(y_data, y_pred, n, Astack, zStack):
 
     #updates last weight in weight matrix and pops from the Astack
@@ -392,18 +341,6 @@ def lossCalculations(y_data, y_pred, n):
         print("lossCalculation Error")
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 #===============================
 # Neural Network
 #===============================
@@ -411,8 +348,6 @@ def lossCalculations(y_data, y_pred, n):
 WArray = np.empty(hiddenLayers+1, dtype = object)
 BArray = np.empty(hiddenLayers+1, dtype = object)
 devBArray = np.empty(hiddenLayers+1, dtype = object)
-
-
 
 #data_F = [n x D],     
 # in R data_T = [n x C], 
@@ -424,7 +359,6 @@ def neuralNetwork(data_F, data_T, n):
 
     Astack = []
     zStack = []
-    
 
     for u in range(1): #Left in here for testing
         Astack, zStack = forwardpass(data_F, n, Astack, zStack)
@@ -445,11 +379,9 @@ def neuralNetwork(data_F, data_T, n):
         backwardpass(data_T, y_pred, n, Astack, zStack)
     return loss
 
-# neuralNetwork(trainF, trainT, train_n)
-
-
-
-
+#----------------------
+# Assessment
+#----------------------
 
 def devAssesment(X_dev, Y_dev, n):
 
@@ -484,18 +416,6 @@ def devAssesment(X_dev, Y_dev, n):
 
     loss = lossCalculations(Y_dev, y_pred, n)
     return loss
-
-
-   
-
-    
-
-
-   
-
-
-
-
 
 
 #===============================
@@ -537,7 +457,6 @@ while Update_counts < totalUpdates:
             devLoss = devAssesment(devF, devT, dev_n)
             print("\tdev = ", devLoss.round(3))
 
-
         #For every other one
         Update_counts += 1
         if Update_counts % reportFrequency == 0:
@@ -547,8 +466,6 @@ while Update_counts < totalUpdates:
             update_devBArray(BArray)
             devLoss = devAssesment(devF, devT, dev_n)
             print("\tdev = ", devLoss.round(3))
-
-        
     Epoch_count +=1
     
     
